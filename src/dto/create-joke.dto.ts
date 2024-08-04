@@ -1,12 +1,9 @@
-// src/dto/create-joke.dto.ts
-import { IsString, IsNotEmpty } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateJokeDto {
-  @IsString()
-  @IsNotEmpty()
-  text: string;
+  @ApiProperty({ description: 'The content of the joke' })
+  readonly content: string;
 
-  @IsString()
-  @IsNotEmpty()
-  type: string;
+  @ApiProperty({ description: 'The type of the joke' })
+  readonly type: string;
 }

@@ -1,23 +1,22 @@
-// src/schemas/joke.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
+import { JokeType } from './joke-type.schema';
 
-@Schema()
+@Schema({
+  toJSON: {
+    transform: function (doc, ret) {
+      ret.id = ret._id;
+      delete ret._id;
+      delete ret.__v;
+    },
+  },
+})
 export class Joke extends Document {
   @Prop({ required: true })
-  text: string;
+  content: string;
 
-  @Prop({ required: true })
-  type: string;
-
-  @Prop({ default: 'pending' })
-  status: string;
-
-  @Prop({ default: Date.now })
-  createdAt: Date;
-
-  @Prop({ default: Date.now })
-  updatedAt: Date;
+  @Prop({ required: true, type: Types.ObjectId, ref: 'JokeType' })
+  type: JokeType;
 }
 
 export const JokeSchema = SchemaFactory.createForClass(Joke);

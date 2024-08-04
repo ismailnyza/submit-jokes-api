@@ -27,7 +27,7 @@ export class JokesService {
     return jokes.map((joke) => ({
       id: joke._id,
       content: joke.content,
-      type: joke.type.name,
+      type: joke.type,
     }));
   }
 }

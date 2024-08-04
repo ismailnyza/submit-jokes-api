@@ -1,22 +1,18 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
-import { JokeType } from './joke-type.schema';
+import { Document, Schema as MongooseSchema } from 'mongoose';
 
-@Schema({
-  toJSON: {
-    transform: function (doc, ret) {
-      ret.id = ret._id;
-      delete ret._id;
-      delete ret.__v;
-    },
-  },
-})
-export class Joke extends Document {
-  @Prop({ required: true })
+export type JokeDocument = Joke & Document;
+
+@Schema()
+export class Joke {
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'JokeType' })
+  type: MongooseSchema.Types.ObjectId;
+
+  @Prop()
   content: string;
 
-  @Prop({ required: true, type: Types.ObjectId, ref: 'JokeType' })
-  type: JokeType;
+  @Prop()
+  author: string;
 }
 
 export const JokeSchema = SchemaFactory.createForClass(Joke);

@@ -1,9 +1,15 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsNotEmpty } from 'class-validator';
+import { Types } from 'mongoose';
 
 export class CreateJokeDto {
-  @ApiProperty({ description: 'The content of the joke' })
+  @IsNotEmpty()
+  readonly type: Types.ObjectId;
+
+  @IsString()
+  @IsNotEmpty()
   readonly content: string;
 
-  @ApiProperty({ description: 'The type of the joke' })
-  readonly type: string;
+  @IsString()
+  @IsNotEmpty()
+  readonly author: string;
 }

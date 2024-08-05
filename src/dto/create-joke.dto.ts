@@ -8,8 +8,4 @@ export class CreateJokeDto {
   @IsString()
   @IsNotEmpty()
   readonly content: string;
-
-  @IsString()
-  @IsNotEmpty()
-  readonly author: string;
 }

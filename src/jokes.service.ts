@@ -28,6 +28,7 @@ export class JokesService {
       id: joke._id,
       content: joke.content,
       type: joke.type,
+      status: joke.status,
     }));
   }
 }

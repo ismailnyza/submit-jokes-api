@@ -12,7 +12,7 @@ export class Joke {
   content: string;
 
   @Prop()
-  author: string;
+  status: string;
 }
 
 export const JokeSchema = SchemaFactory.createForClass(Joke);
